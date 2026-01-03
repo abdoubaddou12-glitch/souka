@@ -4,10 +4,12 @@ import react from '@vitejs/plugin-react';
 
 export default defineConfig({
   plugins: [react()],
-  server: {
-    port: 3000
+  define: {
+    // هذا السطر يمنع خطأ "process is not defined" في المتصفح
+    'process.env.API_KEY': JSON.stringify(process.env.API_KEY || '')
   },
   build: {
-    outDir: 'dist'
+    outDir: 'dist',
+    emptyOutDir: true,
   }
 });

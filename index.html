@@ -12,6 +12,8 @@
         body {
             font-family: 'Tajawal', sans-serif;
             background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
         }
         .jumia-orange { color: #f68b1e; }
         .bg-jumia-orange { background-color: #f68b1e; }
@@ -36,6 +38,7 @@
 </head>
 <body>
     <div id="root"></div>
-    <script type="module" src="/index.tsx"></script>
+    <!-- استخدام مسار نسبي لضمان العثور على الملف في بيئة الإنتاج -->
+    <script type="module" src="./index.tsx"></script>
 </body>
 </html>
