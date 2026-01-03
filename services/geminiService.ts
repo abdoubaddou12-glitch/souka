@@ -1,18 +1,16 @@
 
 import { GoogleGenAI } from "@google/genai";
 
-const API_KEY = process.env.API_KEY || "";
-
 export class GeminiService {
-  private ai: GoogleGenAI;
-
-  constructor() {
-    this.ai = new GoogleGenAI({ apiKey: API_KEY });
+  private getAI() {
+    // ننشئ نسخة جديدة عند كل طلب لضمان استخدام أحدث مفتاح API متوفر
+    return new GoogleGenAI({ apiKey: process.env.API_KEY || "" });
   }
 
   async getShoppingAssistantResponse(query: string, history: { role: 'user' | 'model', parts: { text: string }[] }[] = []) {
     try {
-      const response = await this.ai.models.generateContent({
+      const ai = this.getAI();
+      const response = await ai.models.generateContent({
         model: 'gemini-3-flash-preview',
         contents: [
           ...history,
@@ -31,7 +29,8 @@ export class GeminiService {
 
   async searchWithGrounding(query: string) {
     try {
-      const response = await this.ai.models.generateContent({
+      const ai = this.getAI();
+      const response = await ai.models.generateContent({
         model: "gemini-3-flash-preview",
         contents: `ما هي أفضل ${query} المتوفرة في السوق حالياً وما هي مميزاتها؟ اعطني روابط للمراجعات إن أمكن.`,
         config: {
