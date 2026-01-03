@@ -1,10 +1,10 @@
-
 import { GoogleGenAI } from "@google/genai";
 
 export class GeminiService {
   private getAI() {
-    // ننشئ نسخة جديدة عند كل طلب لضمان استخدام أحدث مفتاح API متوفر
-    return new GoogleGenAI({ apiKey: process.env.API_KEY || "" });
+    // وصول آمن لمفتاح API
+    const apiKey = typeof process !== 'undefined' && process.env ? process.env.API_KEY : '';
+    return new GoogleGenAI({ apiKey: apiKey || "" });
   }
 
   async getShoppingAssistantResponse(query: string, history: { role: 'user' | 'model', parts: { text: string }[] }[] = []) {
