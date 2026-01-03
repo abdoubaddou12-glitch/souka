@@ -1,0 +1,8 @@
+{
+  "name": "Souqna - AI Marketplace",
+  "description": "منصة سوقنا المتطورة للتجارة الإلكترونية متعددة البائعين، مدعومة بالذكاء الاصطناعي لتجربة تسوق فريدة.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}
