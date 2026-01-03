@@ -5,11 +5,20 @@ import react from '@vitejs/plugin-react';
 export default defineConfig({
   plugins: [react()],
   define: {
-    // هذا السطر يمنع خطأ "process is not defined" في المتصفح
-    'process.env.API_KEY': JSON.stringify(process.env.API_KEY || '')
+    // نستخدم 'global' كبديل لـ process في المتصفح لتجنب أخطاء التعريف
+    'process.env': {
+      API_KEY: JSON.stringify(process.env.API_KEY || '')
+    }
   },
+  base: './', // يضمن عمل الروابط بشكل صحيح سواء على نطاق رئيسي أو فرعي
   build: {
     outDir: 'dist',
-    emptyOutDir: true,
+    assetsDir: 'assets',
+    sourcemap: false,
+    minify: 'esbuild',
+  },
+  server: {
+    port: 3000,
+    host: true
   }
 });
